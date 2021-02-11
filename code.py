@@ -1,14 +1,18 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPainter, QColor, QBrush
 from PyQt5 import uic
 import sys
 import random
 
 
-class Main(QMainWindow):
+class Main(QWidget):
     def __init__(self):
         super(Main, self).__init__()
-        uic.loadUi('UI.ui', self)
+        self.setFixedSize(400, 400)
+        self.btn = QPushButton(self)
+        self.btn.move(150, 150)
+        self.btn.resize(50, 50)
+        self.btn.setText('Кнопка')
         self.btn.clicked.connect(self.cl)
 
     def cl(self):
@@ -17,12 +21,10 @@ class Main(QMainWindow):
         self.close()
 
 
-class Main1(QMainWindow):
+class Main1(QWidget):
     def __init__(self):
         super(Main1, self).__init__()
         self.setFixedSize(500, 500)
-        #a =
-        random.choice(range(0, 400))
 
     def paintEvent(self, e):
         qp = QPainter()
@@ -31,10 +33,15 @@ class Main1(QMainWindow):
         qp.end()
 
     def drawRects(self, qp):
+        print(2)
         col = QColor(255, 255, 0)
         qp.setPen(col)
-        qp.setBrush(QColor(255, 255, 0))
+        print(3)
+        qp.setBrush(QColor(random.choice(range(0, 255)), random.choice(range(0, 255)), random.choice(range(0, 255))))
+        print(4)
         for i in range(15):
+            qp.setBrush(
+                QColor(random.choice(range(0, 255)), random.choice(range(0, 255)), random.choice(range(0, 255))))
             a = random.choice(range(0, 100))
             qp.drawEllipse(random.choice(range(0, 400)), random.choice(range(0, 400)), a, a)
 
